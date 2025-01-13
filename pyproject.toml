@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+# Project Metadata
+# ================
+name = "flow_channel_cnn"
+version = "0.1.0"
+description = "Pytorch Implementation of Shift and Flip Invariant Convolutional Neural Networks for Flow Channel Images"
+readme = "README.rst"
+authors = [
+    {name = "Jonas Teufel", email = "jonseb1998@gmail.com"},
+]
+maintainers = [
+    {name = "Jonas Teufel", email = "jonseb1998@gmail.com"},
+]
+license = { text = "MIT License" }
+keywords = [
+    "image processing",
+    "pytorch",
+    "convolutional neural networks",
+    "neural networks",
+    "fluid dynamics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+# Project Dependencies
+# ====================
+requires-python = ">=3.8,<=3.12"
+dependencies = [
+    "torch>=2.2.0,<2.6",
+    "pytorch-lightning>=2.2.0,<3.0",
+    "scikit-learn>=1.5.0,<2.0",
+    "numpy>=1.21.0,<2.0",
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0,<1.0",
+    "rdkit>=2023.0.0",
+    "requests>=2.30.0",
+    "cairosvg>=2.7.1",
+    "imageio>=2.34.0",
+    "rich_click>=1.8.0",
+    "jinja2>=3.0.0",
+    "lorem==0.1.1",
+    "python-dotenv==1.0.1",
+    "pyyaml>=6.0.0",
+    "msgpack>=1.0.2",
+    "pandas<2.2.2",
+    "pycomex>=0.14.0,<1.0",
+    "msgpack_numpy>=0.4.8",
+    "appdirs>=1.4.4,<2.0",
+    "tomlkit>=0.13.2,<1.0",
+]
+
+# Executable Scripts
+# ==================
+
+[project.scripts]
+cmdata = "chem_mat_data.cli:cli"
+
+# Configuration of Build System (Hatchling)
+# =========================================
+
+[tool.hatch.build]
+skip-excluded-dirs=true
+
+# Version Bumping
+# ===============
+
+[tool.bumpversion]
+current_version = "0.1.1"
+parse = "(?<![=<>])(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
+serialize = ["{major}.{minor}.{patch}"]
+search = "{current_version}"
+replace = "{new_version}"
+regex = true
+ignore_missing_version = true
+tag = false
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+allow_dirty = true
+commit = false
+message = "Bump version: {current_version} → {new_version}"
+commit_args = ""
+files = [
+    {filename = "pyproject.toml", search="version = \"{current_version}\"", replace="version = \"{new_version}\""},
+    {filename = "README.rst"},
+    {filename = "chem_mat_data/VERSION"},
+]
